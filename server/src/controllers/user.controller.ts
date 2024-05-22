@@ -14,6 +14,7 @@ export const getUsers = async (req: Request, res: Response) => {
         if(Number(search?.trim())) where.id = Number(search?.trim())
         
         if(req.query?.role) where.role = req.query.role
+        if(req.query?.speciality) where.speciality = req.query.speciality
 
         const [count,result] = await prisma.$transaction([
             prisma.user.count({where}),

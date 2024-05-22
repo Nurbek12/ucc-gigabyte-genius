@@ -19,7 +19,8 @@ export default createRouter({
 
         { path: '/doctor', beforeEnter, component: () => import('@/pages/layout.vue'),
             children: [
-                { path: '', component: () => import('@/pages/doctor/history.vue') },
+                { path: '', component: () => import('@/pages/doctor/dashboard.vue') },
+                { path: 'histories', component: () => import('@/pages/doctor/history.vue') },
             ]
         },
 

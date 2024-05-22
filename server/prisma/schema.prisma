@@ -47,6 +47,7 @@ model User {
   patientHistories History[] @relation("PATIENT_HISORIES")
 
   doctorRedirects Redirect[] @relation("DOCTOR_REDIRECTS")
+  fromDoctorRedirects Redirect[] @relation("FROM_DOCTOR_REDIRECT")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -75,8 +76,12 @@ model Redirect {
 
   files String[]
 
-  review String
+  title String
+  description String
   
+  fromDoctorId Int
+  fromDoctor User @relation("FROM_DOCTOR_REDIRECT", references: [id], fields: [fromDoctorId])
+
   doctorId Int
   doctor User @relation("DOCTOR_REDIRECTS", references: [id], fields: [doctorId])
 

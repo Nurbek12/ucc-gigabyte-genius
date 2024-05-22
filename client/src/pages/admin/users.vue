@@ -12,7 +12,6 @@
             >
 
             <template #table-top>
-                <div class="hidden lg:block"></div>
                 <app-btn @click="dialog=true">Добавить</app-btn>
             </template>
 
@@ -93,7 +92,8 @@ const headers = [
 ]
 
 const customFilters: any[] = [
-    { name: 'role', items: [{ name: 'Все роли', value: undefined }, ...userRoles],nv: undefined }
+    { name: 'role', items: [{ name: 'Все роли', value: undefined }, ...userRoles],nv: undefined },
+    { name: 'speciality', items: [{ name: 'Все Специализатции', value: undefined },...doctorSpecs ], nv: undefined }
 ]
 
 const item = reactive<IUser>({

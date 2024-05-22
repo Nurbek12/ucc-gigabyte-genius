@@ -4,5 +4,6 @@ import { getAllHistories, getHistoryByUserId } from '../controllers/history.cont
 
 export default Router()
     .get('/', authMiddleware, getAllHistories)
-    .get('/:userId', authMiddleware, getHistoryByUserId)
+    .get('/user/:id', authMiddleware, getHistoryByUserId)
+    .get('/id/:id', authMiddleware, getHistoryByUserId)
     // .delete('/:id', authMiddleware, deleteUser)

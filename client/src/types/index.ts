@@ -44,32 +44,36 @@ export interface IHistory {
 }
   
 export interface IRedirect {
-  id: number
+  id?: number
 
-  files: string[]
-  review: string
-  
-  doctorId: number
-  doctor: IUser
+  files?: string[]
+  title: string
+  description: string
 
-  historyId: number
-  history: IHistory
+  fromDoctorId: number | null
+  fromDoctor?: IUser
   
-  createdAt: string
-  updatedAt: string
+  doctorId: number | null
+  doctor?: IUser
+
+  historyId: number | null
+  history?: IHistory
+  
+  createdAt?: string
+  updatedAt?: string
 }
   
 export interface IDiagnosis {
-  id: number
+  id?: number
 
   title: string
   description: string
   drug: number[]
-  files: string[]
+  files?: string[]
 
-  historyId: number
-  history: History
+  historyId: number | null
+  history?: History
   
-  createdAt: string
-  updatedAt: string
+  createdAt?: string
+  updatedAt?: string
 }
