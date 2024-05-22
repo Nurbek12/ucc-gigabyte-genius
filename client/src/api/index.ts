@@ -1,8 +1,9 @@
 import axios from 'axios'
+import { useAppStore } from '@/store/appStore'
 
 export const baseURL = import.meta.env.VITE_BACKEND_URL || ''
-console.log(import.meta.env.VITE_BACKEND_URL);
 
+const appStore = useAppStore()
 const api = axios.create({ baseURL })
 
 api.interceptors.response.use(
@@ -12,7 +13,7 @@ api.interceptors.response.use(
     },
     (err) => {
         if(err.response && err.response.status === 401) {
-            // Logout
+            appStore.logOut()
             return
         }
         return Promise.reject(err)
@@ -20,7 +21,7 @@ api.interceptors.response.use(
 )
 
 export const checkToken = () => {
-    const token = ''
+    const token = appStore.getToken
     token && (api.defaults.headers.common.Authorization = `Bearer ${token}`)
 }
 
