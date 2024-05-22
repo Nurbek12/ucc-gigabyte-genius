@@ -1,7 +1,7 @@
 <template>
     <div class="border-r z-30 bg-white absolute md:sticky top-0 h-[100vh] transition-all flex flex-col" :class="isOpen ? 'w-[250px]' : 'w-[57px]'">
         <div class="p-2 flex flex-col gap-1 overflow-auto scrollbar-hide">
-            <template v-for="link in navLinks.ADMIN" :key="link.url">
+            <template v-for="link in navLinks[store.getUser?.role || 'ADMIN']" :key="link.url">
                 <router-link :to="link.url" v-if="link.url">
                     <div class="select-none px-2 py-2 rounded w-full flex whitespace-nowrap items-center gap-4 transition-all"
                         :class="current_router === link.url ? 'bg-blue-600 hover:bg-blue-500 text-white' : 'text-gray-500 hover:bg-gray-400/20'">

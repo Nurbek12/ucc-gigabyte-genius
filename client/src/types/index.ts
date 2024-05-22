@@ -26,21 +26,21 @@ export interface IUser {
 }
   
 export interface IHistory {
-  id: number
+  id?: number
 
   doctorId: number
-  doctor: IUser
+  doctor?: IUser
 
   patientId: number
-  patient: IUser
+  patient?: IUser
 
   status: "NEW" | "PROCESS" | "FINISH"
   
-  redirects: IRedirect[]
-  diagnosis: IDiagnosis
+  redirects?: IRedirect[]
+  diagnosis?: IDiagnosis
 
-  createdAt: string
-  updatedAt: string
+  createdAt?: string
+  updatedAt?: string
 }
   
 export interface IRedirect {

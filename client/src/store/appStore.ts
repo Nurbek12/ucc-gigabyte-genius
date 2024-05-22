@@ -1,11 +1,10 @@
 import cookies from 'js-cookie'
 import { defineStore } from 'pinia'
 import type { IUser } from '@/types'
-// import { useRouter } from 'vue-router'
 
 export const useAppStore = defineStore('appStore', {
     state: () => ({
-        user: JSON.parse(localStorage.getItem('med-user') || 'null') as IUser | null,
+        user: JSON.parse(localStorage.getItem('lc-user') || 'null') as IUser | null,
         token: cookies.get('lc-token') || null
     }),
     getters: {

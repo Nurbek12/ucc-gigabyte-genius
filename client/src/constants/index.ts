@@ -1,6 +1,7 @@
 import {
-    HeFilledDoctorMale,
+    BsQrCodeScan, 
     FlClipboardText,
+    HeFilledDoctorMale,
 } from '@kalimahapps/vue-icons'
 
 export const navLinks = {
@@ -8,8 +9,12 @@ export const navLinks = {
         { title: 'Пользователи', icon: HeFilledDoctorMale, url: '/admin' },
         { title: 'Истории', icon: FlClipboardText, url: '/admin/histories' }
     ],
-    DOCTOR: [],
-    PATIENT: []
+    DOCTOR: [
+        { title: 'Истории', icon: FlClipboardText, url: '/doctor' }
+    ],
+    PATIENT: [
+        { title: 'QR Код', icon: BsQrCodeScan, url: '/patient' }
+    ]
 }
 
 export const userRoles = [

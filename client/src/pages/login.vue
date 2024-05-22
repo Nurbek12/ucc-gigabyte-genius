@@ -1,5 +1,5 @@
 <template>
-    <main class="grid grid-cols-1 md:grid-cols-2 overflow-hidden">
+    <main class="h-screen grid grid-cols-1 md:grid-cols-2 overflow-hidden">
         <div class="flex justify-center items-center">
             <div class="max-w-[350px] text-center w-full p-4 border rounded">
                 <h1 class="text-2xl font-bold text-blue-500">Med-Care</h1>
@@ -38,7 +38,7 @@ const handleLogin = async () => {
         loading.value = true
         const { data } = await login(authData)
         appStore.setToken(data.token)
-        appStore.setToken(data.token)
+        appStore.setUser(data.user)
         checkToken()
         router.push('/'+data.user.role.toLocaleLowerCase())
 

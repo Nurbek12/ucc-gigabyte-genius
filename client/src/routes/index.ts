@@ -17,6 +17,18 @@ export default createRouter({
             ]
         },
 
+        { path: '/doctor', beforeEnter, component: () => import('@/pages/layout.vue'),
+            children: [
+                { path: '', component: () => import('@/pages/doctor/history.vue') },
+            ]
+        },
+
+        { path: '/patient', beforeEnter, component: () => import('@/pages/layout.vue'),
+            children: [
+                { path: '', component: () => import('@/pages/patient/qr-code.vue') },
+            ]
+        },
+
         { path: '/', name: 'login', component: () => import('@/pages/login.vue') }
     ]
 })
