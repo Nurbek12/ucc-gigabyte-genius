@@ -1,31 +1,31 @@
-interface IUser {
-    id: number
-  
-    firstName: string
-    lastName: string
-    password: string
-    email?: string
-    phone?: string
-    avatar?: string
+export interface IUser {
+  id?: number
 
-    dateOfBirth?: string
-    address?: string
+  firstName: string
+  lastName: string
+  password?: string
+  email?: string
+  phone?: string
+  avatar?: string
 
-    role: "ADMIN" | "DOCTOR" | "PATIENT"
-  
-    speciality?: string
-    roomNumber?: number
+  dateOfBirth?: string
+  address?: string
 
-    doctorHistories: IHistory[]
-    patientHistories: IHistory[]
-  
-    doctorRedirects: IRedirect
-  
-    createdAt: string
-    updatedAt: string
+  role: "ADMIN" | "DOCTOR" | "PATIENT"
+
+  speciality?: string
+  roomNumber?: number
+
+  doctorHistories?: IHistory[]
+  patientHistories?: IHistory[]
+
+  doctorRedirects?: IRedirect[]
+
+  createdAt?: string
+  updatedAt?: string
 }
   
-interface IHistory {
+export interface IHistory {
   id: number
 
   doctorId: number
@@ -43,7 +43,7 @@ interface IHistory {
   updatedAt: string
 }
   
-interface IRedirect {
+export interface IRedirect {
   id: number
 
   files: string[]
@@ -59,7 +59,7 @@ interface IRedirect {
   updatedAt: string
 }
   
-interface IDiagnosis {
+export interface IDiagnosis {
   id: number
 
   title: string
