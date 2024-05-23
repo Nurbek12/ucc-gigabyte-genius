@@ -3,6 +3,7 @@ import {
     FlDesktopPulse,
     FlClipboardText,
     HeFilledDoctorMale,
+    FlClipboardBulletListLtr,
 } from '@kalimahapps/vue-icons'
 
 export const navLinks = {
@@ -15,7 +16,9 @@ export const navLinks = {
         { title: 'Истории', icon: FlClipboardText, url: '/doctor/histories' }
     ],
     PATIENT: [
-        { title: 'QR Код', icon: BsQrCodeScan, url: '/patient' }
+        { title: 'История', icon: FlClipboardText, url: '/patient' },
+        { title: 'Истории', icon: FlClipboardBulletListLtr , url: '/patient/histories' },
+        { title: 'QR Код', icon: BsQrCodeScan, url: '/patient/qr-code' }
     ]
 }
 

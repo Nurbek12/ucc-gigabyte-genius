@@ -8,5 +8,10 @@
 </template>
 
 <script setup lang="ts">
+import { useAppStore } from '@/store/appStore'
+import { joinToUsers  } from '@/api/socket'
 import AppNavDrawer from '@/components/app-nav-drawer.vue'
+
+const appStore = useAppStore()
+joinToUsers(appStore.user?.id!)
 </script>

@@ -1,6 +1,5 @@
 <template>
     <div class="w-full p-2">
-
         <app-table
             :items="items"
             :count="count"
@@ -13,34 +12,24 @@
                 <span class="text-xs">{{ tableItem?.patient?.firstName }} {{ tableItem?.patient?.lastName }}</span>
             </template>
 
+            <template #table-item-phone="{tableItem}">
+                <span class="text-xs">{{ tableItem?.patient?.phone }}</span>
+            </template>
+
             <template #table-item-createdAt="{tableItem}">
                 <span class="text-xs">{{ new Date(tableItem.createdAt).toLocaleString() }}</span>
             </template>
 
             <template #table-item-actions="{tableItem}">
-                <div class="flex gap-1">
-                    <app-btn class="px-0" @click="getHistory(tableItem.patientId)">
-                        Смотреть детали
-                    </app-btn>
-                </div>
+                <app-btn class="px-0" @click="getHistory(tableItem.id)">
+                    Смотреть детали
+                </app-btn>
             </template>
         </app-table>
 
         <app-dialog title="Информатция о истории" :open="dialog" @close-dialog="close">
             <div class="mt-4 flex flex-col gap-4">
-                <h1>Патциент: {{ item.patient?.firstName }} {{ item.patient?.lastName }}</h1>
-                <h1>Телефон: {{ item.patient?.phone }}</h1>
-                <h2>Направлении</h2>
-                <div class="border rounded p-2">
-                    <div v-for="r,i in item.redirects||[]" :key="r.id">
-                        {{ i+1 }}. {{ r.review }}
-                    </div>
-                </div>
-
-                <div class="flex gap-2 items-center">
-                    <app-btn type="button" @click="dialog=false;dialog1=true">Направлять</app-btn>
-                    <app-btn>Диагностика</app-btn>
-                </div>
+                <app-history-card v-if="dialog" :history="item" />
                 <app-btn>Закрыть</app-btn>
             </div>
         </app-dialog>
@@ -53,19 +42,18 @@ import type { IHistory } from '@/types'
 import AppBtn from '@/components/app-btn.vue'
 import AppTable from '@/components/app-table.vue'
 import AppDialog from '@/components/app-dialog.vue'
-import { getAllHistories, getByUserId } from '@/api/history.api'
+import { getAllHistories, getById } from '@/api/history.api'
+import AppHistoryCard from '@/components/app-history-card.vue'
 
 const dialog = ref(false)
-const dialog1 = ref(false)
 const loading = ref(false)
 const count = ref<number>(0)
 const items = ref<IHistory[]>([])
-const itemIndex = ref<number|null>(null)
 
 const headers = [
     { name: "ID", value: "id", sortable: true, balancedText: false, custom: false },
     { name: "Имя и фамилия", value: "firstName", sortable: true, balancedText: true, custom: true },
-    { name: "Телефон", value: "phone", sortable: false, balancedText: true, custom: false },
+    { name: "Телефон", value: "phone", sortable: false, balancedText: true, custom: true },
     { name: "Добавлен", value: "createdAt", sortable: true, balancedText: true, custom: true },
     { name: "Управлять", value: "actions", sortable: false, balancedText: false, custom: true },
 ]
@@ -96,12 +84,11 @@ const close = () => {
         status: 'NEW',
     })
     dialog.value = false
-    itemIndex.value = null
 }
 
 const getHistory = async (id: any) => {
-    const { data } = await getByUserId(id)
-    dialog.value = true
+    const { data } = await getById(id)
     Object.assign(item, data.result)
+    dialog.value = true
 }
 </script>

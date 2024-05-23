@@ -1,6 +1,9 @@
 import path from 'path'
 import cors from 'cors'
 import express from 'express'
+import { Server } from 'socket.io'
+import { createServer } from 'http'
+import SocketConf from './config/socket'
 import { PORT } from './config/variables'
 
 import authRoute from './routes/auth.route'
@@ -10,6 +13,10 @@ import redirectRoute from './routes/redirect.route'
 import diagnosisRoute from './routes/diagnosis.route'
 
 const app = express()
+const server = createServer(app)
+const io = new Server(server, { cors: { origin: '*' } })
+
+SocketConf(io)
 
 app
     .use(cors())
@@ -23,4 +30,5 @@ app
     .use('/api/redirects', redirectRoute)
     .use('/api/diagnosis', diagnosisRoute)
 
+server
     .listen(PORT, () => console.log('server started...'))
