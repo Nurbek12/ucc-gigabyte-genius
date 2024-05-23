@@ -6,6 +6,13 @@ const socket = io(baseURL)
 
 export const joinToUsers = (id: number) => socket.emit('joinToUsers', id)
 
+export const getDocrors = (cb: any) => socket.on('sendDoctorsList', cb)
+
+export const doctorOccuppied = (doctor: number, occupied: boolean) => socket.emit('doctorOccuppied', doctor, occupied)
+
+export const listenDoctorsOccuppied = (cb: any) => socket.on('listenDoctorsOccuppied', cb)
+
+
 
 export const historyCreated = (history: IHistory) => socket.emit('historyCreated', history)
 

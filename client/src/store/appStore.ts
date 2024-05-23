@@ -5,12 +5,14 @@ import type { IUser } from '@/types'
 export const useAppStore = defineStore('appStore', {
     state: () => ({
         user: JSON.parse(localStorage.getItem('lc-user') || 'null') as IUser | null,
-        token: cookies.get('lc-token') || null
+        token: cookies.get('lc-token') || null,
+        doctors: new Map<number, boolean>(),
     }),
     getters: {
         isLogged: state => !!state.token,
         getUser: state => state.user,
         getToken: state => state.token,
+        getDoctors: state => state.doctors
     },
     actions: {
         setToken(token: string | null) {
@@ -28,6 +30,15 @@ export const useAppStore = defineStore('appStore', {
             this.setToken(null)
 
             window.location.href = '/'
+        },
+        setDoctors(doctors: {key: number, value: boolean}[]) {
+            doctors.map(d => this.doctors.set(d.key, d.value))
+        },
+        setDoctor(doctor: number, b: boolean | null) {
+            if(b === null)
+                this.doctors.delete(doctor)
+            else
+                this.doctors.set(doctor, b)        
         }
     }
 })

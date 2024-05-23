@@ -4380,5 +4380,3 @@ export const drugs = [
         "Ishlabchiqaruvchi": "\"Unichem Lab. Ltd\""
     }
 ]
-
-console.log(drugs.length)

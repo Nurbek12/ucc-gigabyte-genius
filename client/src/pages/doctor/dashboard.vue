@@ -51,9 +51,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
 import { doctorSpecs } from '@/constants'
 import { getUsers } from '@/api/user.api'
+import { ref, reactive, watch } from 'vue'
 import AppBtn from '@/components/app-btn.vue'
 import { useAppStore } from '@/store/appStore'
 import { getByUserId } from '@/api/history.api'
@@ -66,7 +66,7 @@ import AppTextarea from '@/components/app-textarea.vue'
 import AppHistoryCard from '@/components/app-history-card.vue'
 import AppQrcodeReader from '@/components/app-qrcode-reader.vue'
 import type { IHistory, IRedirect, IUser, IDiagnosis } from '@/types'
-import { historyCreated, redirectCreated, diagnosisCreated } from '@/api/socket'
+import { historyCreated, redirectCreated, diagnosisCreated, doctorOccuppied } from '@/api/socket'
 
 const dialog = ref(false)
 const dialog1 = ref(false)
@@ -131,4 +131,8 @@ const findDoctors = async (spec: any) => {
     const { data } = await getUsers({ page: 1, limit: 1000, speciality: spec.target.value })
     doctors.value = data.result
 }
+
+watch(history, (v) => {
+    doctorOccuppied(appStore.user?.id!, v !== null) 
+})
 </script>
